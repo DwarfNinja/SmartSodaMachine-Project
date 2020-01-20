@@ -1,0 +1,57 @@
+import math
+
+# dictionaries/data
+cola = {
+    "ma": (20, 16, 6),
+    "di": (4, 2, 20),
+    "wo": (13, 8, 5)
+}
+
+sprite = {
+    "ma": (20, 17, 9),
+    "di": (3, 20, 16),
+    "wo": (10, 8, 3)
+}
+
+water = {
+    "ma": (20, 14, 3),
+    "di": (20, 12, 6),
+    "wo": (1, 20, 14)
+}
+
+
+# melding als de inhoud minder dan 4 is
+
+def meld_bvul_c():
+
+    for stock in cola:
+        if stock <= 4:
+            return ("De rij van de COLA bevat nog maar minder dan 4, bijvullen!")
+        else:
+            return None
+
+def meld_bvul_sp():
+
+    for stock in sprite:
+        if stock <= 4:
+            return ("De rij van de SPRITE bevat nog maar minder dan 4, bijvullen!")
+        else:
+            return None
+
+def meld_bvul_wa():
+
+    for stock in water:
+        if stock <= 4:
+            return ("De rij van de WATER bevat nog maar minder dan 4, bijvullen!")
+        else:
+            return None
+
+print(meld_bvul_c())
+print(meld_bvul_sp())
+print(meld_bvul_wa())
+
+# melding geven extra bijvullen dag van te voren
+
+def meld_xtrabvul():
+
+    return
