@@ -1,57 +1,74 @@
 import math
 
-# dictionaries/data
-cola = {
-    "ma": (20, 16, 6),
-    "di": (4, 2, 20),
-    "wo": (13, 8, 5)
-}
+# notifications to restock
 
-sprite = {
-    "ma": (20, 17, 9),
-    "di": (3, 20, 16),
-    "wo": (10, 8, 3)
-}
+def notificiation_restock_cola():
 
-water = {
-    "ma": (20, 14, 3),
-    "di": (20, 12, 6),
-    "wo": (1, 20, 14)
-}
+    if (last_cola_stock()) <= 4:
+        return ("The COLA has less than 4, restock!")
+    else:
+        return ("The COLA stock doesn't have to be refilled")
 
+def notificiation_restock_sprite():
 
-# melding als de inhoud minder dan 4 is
+    if (last_sprite_stock()) <= 4:
+        return ("The SPRITE has less than 4, restock!")
+    else:
+        return ("The SPRITE stock doesn't have to be refilled")
 
-def meld_bvul_c():
+def notificiation_restock_water():
 
-    for stock in cola:
-        if stock <= 4:
-            return ("De rij van de COLA bevat nog maar minder dan 4, bijvullen!")
+        if (last_water_stock()) <= 4:
+            return ("The WATER has less than 4, restock!")
         else:
-            return None
+            return ("The WATER stock doesn't have to be refilled")
 
-def meld_bvul_sp():
+def notificiation_restock_fernandes():
 
-    for stock in sprite:
-        if stock <= 4:
-            return ("De rij van de SPRITE bevat nog maar minder dan 4, bijvullen!")
-        else:
-            return None
+    if (last_fernandes_stock()) <= 4:
+        return ("The FERNANDES has less than 4, restock!")
+    else:
+        return ("The FERNANDES stock doesn't have to be refilled")
 
-def meld_bvul_wa():
+def notificiation_restock_dr_pepper():
 
-    for stock in water:
-        if stock <= 4:
-            return ("De rij van de WATER bevat nog maar minder dan 4, bijvullen!")
-        else:
-            return None
+    if (last_drpepper_stock()) <= 4:
+        return ("The DR_PEPPER has less than 4, restock!")
+    else:
+        return ("The DR_PEPPER stock doesn't have to be refilled")
 
-print(meld_bvul_c())
-print(meld_bvul_sp())
-print(meld_bvul_wa())
+def notificiation_restock_ice_tea():
+
+    if (last_icetea_stock()) <= 4:
+        return ("The ICE_TEA has less than 4, restock!")
+    else:
+        return ("The ICE_TEA stock doesn't have to be refilled")
+
+def notificiation_restock_fanta():
+
+    if (last_fanta_stock()) <= 4:
+        return ("The FANTA has less than 4, restock!")
+    else:
+        return ("The FANTA stock doesn't have to be refilled")
+
+def notificiation_restock_pepsi():
+
+    if (last_pepsi_stock()) <= 4:
+        return ("The PEPSI has less than 4, restock!")
+    else:
+        return ("The PEPSI stock doesn't have to be refilled")
 
 # melding geven extra bijvullen dag van te voren
 
-def meld_xtrabvul():
+def notification_restock_day_before():
+    return
 
+# melding als er wordt geschud
+
+def notification_shaking():
+    return
+
+# temperatuur regeling
+
+def temperature_regulation():
     return
