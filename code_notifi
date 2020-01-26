@@ -1,5 +1,3 @@
-import math
-
 # notifications to restock
 
 def notificiation_restock_cola():
