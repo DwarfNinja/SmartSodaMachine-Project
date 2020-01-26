@@ -58,18 +58,38 @@ def notificiation_restock_pepsi():
     else:
         return ("The PEPSI stock doesn't have to be refilled")
 
-# melding geven extra bijvullen dag van te voren
+# stock information per week
+def monday_stock():
+    return 
+
+def tuesday_stock():
+    return 
+
+def wednesday_stock():
+    return 
+
+def thursday_stock():
+    return
+
+def friday_stock():
+    return 
+
+def saturday_stock():
+    return
+
+def sunday_stock():
+    return
 
 def busiest_day():
     # check what day sold the most
 
-    total_stock_of_mon = sum(monday) # info uit de DB
-    total_stock_of_tue = sum(tuesday)
-    total_stock_of_wed = sum(wednesday)
-    total_stock_of_thu = sum(thursday)
-    total_stock_of_fri = sum(friday)
-    total_stock_of_sat = sum(saturday)
-    total_stock_of_sun = sum(sunday)
+    total_stock_of_mon = sum(monday_stock()) # info uit de DB
+    total_stock_of_tue = sum(tuesday_stock())
+    total_stock_of_wed = sum(wednesday_stock())
+    total_stock_of_thu = sum(thursday_stock())
+    total_stock_of_fri = sum(friday_stock())
+    total_stock_of_sat = sum(saturday_stock())
+    total_stock_of_sun = sum(sunday_stock())
     weekly_stock_info = [total_stock_of_mon, total_stock_of_tue, total_stock_of_wed, total_stock_of_thu, total_stock_of_fri, total_stock_of_sat, total_stock_of_sun]
 
     busiest_day = max(weekly_stock_info)
@@ -77,5 +97,5 @@ def busiest_day():
     return busiest_day
 
 def notification_restock_day_before():
-    # give notification
+    # give notification to restock a day before the bussiest day
     return "Please restock the day before " + busiest_day()
