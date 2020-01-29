@@ -155,6 +155,28 @@ elif user_input.lower() == "fernandes":
 print("Test Check sheet is: ", last_line)
 
 
+def average_amount_of_soda():       # shows the average amount of soda that is left over, for the n amount of days
+    global days
+    days = int(input("For how many days do you want the average?: "))
+
+    requested_range = lines_raw[-(days + 1):-1]
+    str_requested_range = str(requested_range).replace("[", "").replace("]", "").replace("'", "").replace(" ", "").split(",")
+    str_requested_range = [int(i) for i in str_requested_range]     # makes a complete list
+
+    def delete_8th_char():          # deletes 8th character from list
+
+        del str_requested_range[8 - 1::8]
+        return str_requested_range
+
+    delete_8th_char()
+    total = sum(delete_8th_char())  #total amount of all days
+    average = total / days      # divides the sum with n days
+    return round(average)
+
+
+output_average_requested_stock = average_amount_of_soda()
+
+
 # ________________________________
 # ........NOTIFICATIONS...........
 
@@ -216,10 +238,9 @@ def send_email_notification():
 # _______________
 # Call functions:
 
-restock_notification = "OFF"
-while restock_notifications == "ON":
+# restock_notification = email.get()  #TODO: EMAIL NOTIFCAITON TOGGLE
+while restock_notifications == 1:
     restock_notifications()
-
 if stock_is_low == True:
     send_email_notification()
 
@@ -230,7 +251,9 @@ fanta_manual_restockbutton = True
 input_manual_restockamount = int() #  INVUL VAKJE ACHRAF
 
 
-#_____________________________________________________________________________________________
+# _____________________________________________________________________________________________
+# ........................................GUI..................................................
+
 #makes connection, exception for connection fail and grabs and sets variable for the data
 
 main_screen = Tk()
@@ -281,7 +304,6 @@ def var_checked():
                               sprite_checked.get(),ice_tea_checked.get(), drpepper_checked.get(),
                               pepsi_checked.get(), fernandes_checked.get()]
     return output_of_restockbutton
-    print(output_of_restockbutton)
 
 
 def open_restock():
@@ -302,8 +324,8 @@ def open_restock():
     global fernandes_checked
     fernandes_checked = IntVar()
 
-
-
+    # global email  #TODO: EMAIL NOTIFICATION
+    # email = IntVar()
     top = Toplevel()
 
     fanta_check_button = Checkbutton(master=top, text='Fanta', variable=fanta_checked)
@@ -412,38 +434,53 @@ def open_stock():
     stock_label.pack(pady=10, padx=10)
     text_blok = Text(master=top)
     text_blok.place(x=100, y=50, height=300, width=300)
-    get_stock_button1 = Button(master=top, text='Fanta')
-    get_stock_button1.place(x=120, y=360)
-    get_stock_button2 = Button(master=top, text='Coca cola')
-    get_stock_button2.place(x=160, y=360)
-    get_stock_button3 = Button(master=top, text='Water')
-    get_stock_button3.place(x=220, y=360)
-    get_stock_button4 = Button(master=top, text='Sprite')
-    get_stock_button4.place(x=260, y=360)
-    get_stock_button5 = Button(master=top, text='Dr.Pepper')
-    get_stock_button5.place(x=300, y=360)
-    get_stock_button6 = Button(master=top, text='Ice Tea')
-    get_stock_button6.place(x=160, y=390)
-    get_stock_button7 = Button(master=top, text='Fernandes')
-    get_stock_button7.place(x=205, y=390)
-    get_stock_button8 = Button(master=top, text='Pepsi')
-    get_stock_button8.place(x=240, y=390)
+
+    def current_stock_button():
+
+        get_stock_button1 = Button(master=top, text='Fanta', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_fanta_stock)))
+        get_stock_button1.place(x=120, y=360)
+
+        get_stock_button2 = Button(master=top, text='Coca cola', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_cola_stock)))
+        get_stock_button2.place(x=160, y=360)
+
+        get_stock_button3 = Button(master=top, text='Water', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_water_stock)))
+        get_stock_button3.place(x=220, y=360)
+
+        get_stock_button4 = Button(master=top, text='Sprite', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_sprite_stock)))
+        get_stock_button4.place(x=260, y=360)
+
+        get_stock_button5 = Button(master=top, text='Dr.Pepper', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_drpepper_stock)))
+        get_stock_button5.place(x=300, y=360)
+
+        get_stock_button6 = Button(master=top, text='Ice Tea', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_icetea_stock)))
+        get_stock_button6.place(x=160, y=390)
+
+        get_stock_button7 = Button(master=top, text='Fernandes', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_fernandes_stock)))
+        get_stock_button7.place(x=205, y=390)
+
+        get_stock_button8 = Button(master=top, text='Pepsi', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_pepsi_stock)))
+        get_stock_button8.place(x=240, y=390)
+    current_stock_button()
     top.title('Stock')
 
 
-def old_stock():
+def average_stock():
     top = Toplevel()
-    top.geometry('500x500')
+    top.geometry('500x150')
     text_blok = Text(master=top)
-    text_blok.place(x=100, y=50, height=300, width=300)
-    open_old_stock_button = Button(master=top, text='Get all stock')
-    open_old_stock_button.pack(pady=10, padx=10)
+    text_blok.place(x=80, y=50, height=40, width=360)
+    average_stock_label = Label(master=top)
+    average_stock_label.pack(pady=10, padx=10)
+    text_blok.insert(END, "The average stock for the requested days is: " + str(output_average_requested_stock))
+    # open_old_stock_button = Button(master=top, text='Get all stock')
+    # open_old_stock_button.pack(pady=10, padx=10)
 
 
 menu_button.menu.add_command(label='Error Logs', command=open_error_logs)
 menu_button.menu.add_command(label='Restock', command=open_restock)
 menu_button.menu.add_command(label='Current Stock', command=open_stock)
-menu_button.menu.add_command(label='Average Stock', command=old_stock)
+menu_button.menu.add_command(label='Average Stock', command=average_stock)
+
 
 
 menu_button.pack()
