@@ -130,58 +130,59 @@ last_fernandes_stock = last_line[7]
 # ____________________________________
 # user_input and answers of user_input
 
-print("Choose out of the following soda's:" "\n", all_sodas_string, "\n")
 
-user_input = input("From which soda do you want information?")
-
-if user_input.lower() == "fanta":
-    print(soda_name_fanta() + " has a stock of: " + str(last_fanta_stock))
-elif user_input.lower() == "water":
-    print(soda_name_water() + " has a stock of: " + str(last_water_stock))
-elif user_input.lower() == "cola":
-    print(soda_name_cola() + " has a stock of: " + str(last_cola_stock))
-elif user_input.lower() == "sprite":
-    print(soda_name_sprite() + " has a stock of: " + str(last_sprite_stock))
-elif user_input.lower() == "icetea":
-    print(soda_name_icetea() + " has a stock of: " + str(last_icetea_stock))
-elif user_input.lower() == "drpepper":
-    print(soda_name_drpepper() + " has a stock of: " + str(last_drpepper_stock))
-elif user_input.lower() == "pepsi":
-    print(soda_name_pepsi() + " has a stock of: " + str(last_pepsi_stock))
-elif user_input.lower() == "fernandes":
-    print(soda_name_fernandes() + " has a stock of: " + str(last_fernandes_stock))
-
-
-print("Test Check sheet is: ", last_line)
-
-
-def average_amount_of_soda():       # shows the average amount of soda that is left over, for the n amount of days
-    global days
-    days = int(input("For how many days do you want the average?: "))
-
-    requested_range = lines_raw[-(days + 1):-1]
-    str_requested_range = str(requested_range).replace("[", "").replace("]", "").replace("'", "").replace(" ", "").split(",")
-    str_requested_range = [int(i) for i in str_requested_range]     # makes a complete list
-
-    def delete_8th_char():          # deletes 8th character from list
-
-        del str_requested_range[8 - 1::8]
-        return str_requested_range
-
-    delete_8th_char()
-    total = sum(delete_8th_char())  #total amount of all days
-    average = total / days      # divides the sum with n days
-    return round(average)
+#  TODO: Print commands to get last known soda stock
+# print("Choose out of the following soda's:" "\n", all_sodas_string, "\n")
+#
+# user_input = input("From which soda do you want information?")
+#
+# if user_input.lower() == "fanta":
+#     print(soda_name_fanta() + " has a stock of: " + str(last_fanta_stock))
+# elif user_input.lower() == "water":
+#     print(soda_name_water() + " has a stock of: " + str(last_water_stock))
+# elif user_input.lower() == "cola":
+#     print(soda_name_cola() + " has a stock of: " + str(last_cola_stock))
+# elif user_input.lower() == "sprite":
+#     print(soda_name_sprite() + " has a stock of: " + str(last_sprite_stock))
+# elif user_input.lower() == "icetea":
+#     print(soda_name_icetea() + " has a stock of: " + str(last_icetea_stock))
+# elif user_input.lower() == "drpepper":
+#     print(soda_name_drpepper() + " has a stock of: " + str(last_drpepper_stock))
+# elif user_input.lower() == "pepsi":
+#     print(soda_name_pepsi() + " has a stock of: " + str(last_pepsi_stock))
+# elif user_input.lower() == "fernandes":
+#     print(soda_name_fernandes() + " has a stock of: " + str(last_fernandes_stock))
 
 
-output_average_requested_stock = average_amount_of_soda()
+#print("Test Check sheet is: ", last_line)
+
+
+# def average_amount_of_soda():       # shows the average amount of soda that is left over, for the n amount of days
+#     # global days
+#     # days = int(input("For how many days do you want the average?: "))
+#
+#     requested_range = lines_raw[-(days + 1):-1]
+#     str_requested_range = str(requested_range).replace("[", "").replace("]", "").replace("'", "").replace(" ", "").split(",")
+#     str_requested_range = [int(i) for i in str_requested_range]     # makes a complete list
+#
+#     def delete_8th_char():          # deletes 8th character from list
+#
+#         del str_requested_range[8 - 1::8]
+#         return str_requested_range
+#
+#     delete_8th_char()
+#     total = sum(delete_8th_char())  #total amount of all days
+#     average = total / days      # divides the sum with n days
+#     return round(average)
+#
+#
+# output_average_requested_stock = average_amount_of_soda()
 
 
 # ________________________________
 # ........NOTIFICATIONS...........
 
 stock_is_low = False
-
 
 def restock_notifications():
     global stock_is_low
@@ -254,17 +255,21 @@ input_manual_restockamount = int() #  INVUL VAKJE ACHRAF
 # _____________________________________________________________________________________________
 # ........................................GUI..................................................
 
-#makes connection, exception for connection fail and grabs and sets variable for the data
+# makes connection, exception for connection fail and grabs and sets variable for the data
 
 main_screen = Tk()
 main_screen.title('Main menu')
-main_screen.geometry('300x300')
+main_screen.geometry('300x479')
+sodamachine_image = PhotoImage(file="SodaMachineFINAL.png")
+photolabel = Label(main_screen, image=sodamachine_image)
+photolabel.place(x=0, y=0)
 
-
-close_windows_button = Button(master=main_screen, text='Close window(s)', command=main_screen.destroy)
-close_windows_button.pack(pady=30, padx=30)
-menu_button = Menubutton(main_screen, text='Main menu', font='arial')
+small_font = "segoe ui semibold", "10"
+close_windows_button = Button(master=main_screen, text='Close window(s)', font=small_font, command=main_screen.destroy)
+close_windows_button.place(x=185, y=443)
+menu_button = Menubutton(main_screen, text='Menu', bg="red", fg="white", font=("segoe ui bold", "15"))
 menu_button.menu = Menu(menu_button)
+menu_button.place(x=3, y=3)
 menu_button['menu'] = menu_button.menu
 
 
@@ -301,8 +306,8 @@ def open_error_logs():
 def var_checked():
     global output_of_restockbutton
     output_of_restockbutton = [fanta_checked.get(), water_checked.get(), coca_cola_checked.get(),
-                              sprite_checked.get(),ice_tea_checked.get(), drpepper_checked.get(),
-                              pepsi_checked.get(), fernandes_checked.get()]
+                               sprite_checked.get(),ice_tea_checked.get(), drpepper_checked.get(),
+                               pepsi_checked.get(), fernandes_checked.get()]
     return output_of_restockbutton
 
 
@@ -346,7 +351,7 @@ def open_restock():
     drpepper_check_button = Checkbutton(master=top, text='Dr.Pepper', variable=drpepper_checked)
     drpepper_check_button.pack(pady=10, padx=10)
 
-    pepsi_check_button = Checkbutton(master=top, text='pepsi', variable=pepsi_checked)
+    pepsi_check_button = Checkbutton(master=top, text='Pepsi', variable=pepsi_checked)
     pepsi_check_button.pack(pady=10, padx=10)
 
     fernandes_check_button = Checkbutton(master=top, text='Fernandes', variable=fernandes_checked)
@@ -426,54 +431,97 @@ def restockbutton_pressed():
         print("Inventory has been restocked succesfully!")
 
 
-
 def open_stock():
     top = Toplevel()
-    top.geometry('500x500')
-    stock_label = Label(master=top, text='Welcome to a overview of the current stock')
-    stock_label.pack(pady=10, padx=10)
-    text_blok = Text(master=top)
-    text_blok.place(x=100, y=50, height=300, width=300)
-
-    def current_stock_button():
-
-        get_stock_button1 = Button(master=top, text='Fanta', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_fanta_stock)))
-        get_stock_button1.place(x=120, y=360)
-
-        get_stock_button2 = Button(master=top, text='Coca cola', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_cola_stock)))
-        get_stock_button2.place(x=160, y=360)
-
-        get_stock_button3 = Button(master=top, text='Water', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_water_stock)))
-        get_stock_button3.place(x=220, y=360)
-
-        get_stock_button4 = Button(master=top, text='Sprite', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_sprite_stock)))
-        get_stock_button4.place(x=260, y=360)
-
-        get_stock_button5 = Button(master=top, text='Dr.Pepper', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_drpepper_stock)))
-        get_stock_button5.place(x=300, y=360)
-
-        get_stock_button6 = Button(master=top, text='Ice Tea', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_icetea_stock)))
-        get_stock_button6.place(x=160, y=390)
-
-        get_stock_button7 = Button(master=top, text='Fernandes', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_fernandes_stock)))
-        get_stock_button7.place(x=205, y=390)
-
-        get_stock_button8 = Button(master=top, text='Pepsi', command=lambda: text_blok.insert(END, "The current stock for the requested soda is: " + str(last_pepsi_stock)))
-        get_stock_button8.place(x=240, y=390)
-    current_stock_button()
     top.title('Stock')
+    top.geometry('400x400')
+    Label(master=top, text="Select a soda to show its current stock").place(x=93, y=20)
+    Label(master=top, text='Current stock of: ').place(x=207, y=45)
+    text_block = Text(master=top)
+    text_block.place(x=195, y=75, height=269, width=120)
 
+    FantaButton = Button(master=top, text='Fanta', font=small_font, bg="#FC8102",
+                         command=lambda: text_block.insert(END, "Fanta = " + str(last_fanta_stock) + "\n"))
+    FantaButton.place(x=85, y=75, width=100)
+
+    WaterButton = Button(master=top, text='Water', font=small_font, bg="#71BBEC",
+                         command=lambda: text_block.insert(END, "Water = " + str(last_water_stock) + "\n"))
+    WaterButton.place(x=85, y=109, width=100)
+
+    ColaButton = Button(master=top, text='Cola', font=small_font, bg="#FE001A",
+                        command=lambda: text_block.insert(END, "Cola =  " + str(last_cola_stock) + "\n"))
+    ColaButton.place(x=85, y=143, width=100)
+
+    SpriteButton = Button(master=top, text='Sprite', font=small_font, bg="#62B43A",
+                          command=lambda: text_block.insert(END, "Sprite =  " + str(last_sprite_stock) + "\n"))
+    SpriteButton.place(x=85, y=177, width=100)
+
+    IceteaButton = Button(master=top, text='Ice Tea', font=small_font, bg="#FFE105",
+                          command=lambda: text_block.insert(END, "Ice-tea =  " + str(last_icetea_stock) + "\n"))
+    IceteaButton.place(x=85, y=211, width=100)
+
+    DrpepperButton = Button(master=top, text='Dr.Pepper', font=small_font, bg="#890024",
+                            command=lambda: text_block.insert(END, "Dr.Pepper = " + str(last_drpepper_stock) + "\n"))
+    DrpepperButton.place(x=85, y=245, width=100)
+
+    PepsiButton = Button(master=top, text='Pepsi', font=small_font, bg="#1C52A2",
+                         command=lambda: text_block.insert(END, "Pepsi = " + str(last_pepsi_stock) + "\n"))
+    PepsiButton.place(x=85, y=279, width=100)
+
+    FernandesButton = Button(master=top, text='Fernandes', font=small_font, bg="#EA1A5C",
+                             command=lambda: text_block.insert(END, "Fernandes = " + str(last_fernandes_stock) + "\n"))
+    FernandesButton.place(x=85, y=313, width=100)
 
 def average_stock():
     top = Toplevel()
-    top.geometry('500x150')
-    text_blok = Text(master=top)
-    text_blok.place(x=80, y=50, height=40, width=360)
-    average_stock_label = Label(master=top)
-    average_stock_label.pack(pady=10, padx=10)
-    text_blok.insert(END, "The average stock for the requested days is: " + str(output_average_requested_stock))
-    # open_old_stock_button = Button(master=top, text='Get all stock')
-    # open_old_stock_button.pack(pady=10, padx=10)
+    top.geometry('400x200')
+    global inputfield
+    inputfield = Entry(top, width=20)
+    inputfield.place(x=190, y=30)
+    Label(master=top, text="Enter the amount of days:").place(x=30, y=30)
+    Label(master=top, text="The average stock for the requested days is:").place(x=30, y=120)
+    Button(master=top, text="Input", command=knop).place(x=50, y=50)
+    global output_of_averagecalculation
+    output_of_averagecalculation = Text(master=top, height=1, width=20)
+    output_of_averagecalculation.place(x=270, y=120)
+
+def knop():
+    return_of_inputfield = inputfield.get()
+    string_of_inputfield = str(return_of_inputfield)
+    global integer_of_inputfield
+    integer_of_inputfield = int(string_of_inputfield)
+    average_amount_of_soda_calculation()
+
+
+def average_amount_of_soda_calculation():       # shows the average amount of soda that is left over, for the n amount of days
+    # global days
+    # days = int(input("For how many days do you want the average?: "))
+
+    requested_range = lines_raw[-(integer_of_inputfield + 1):-1]
+    str_requested_range = str(requested_range).replace("[", "").replace("]", "").replace("'", "").replace(" ", "").split(",")
+    str_requested_range = [int(i) for i in str_requested_range]     # makes a complete list
+
+    def delete_8th_char():          # deletes 8th character from list
+
+        del str_requested_range[8 - 1::8]
+        return str_requested_range
+
+    delete_8th_char()
+    total = sum(delete_8th_char())  #total amount of all days
+    average = total / integer_of_inputfield     # divides the sum with n days
+    output_of_averagecalculation.insert(END, str(average))
+
+
+# def average_stock():
+#     top = Toplevel()
+#     top.geometry('500x300')
+#     text_block = Text(master=top)
+#     text_block.place(x=80, y=50, height=40, width=360)
+#     average_stock_label = Label(master=top)
+#     average_stock_label.pack(pady=10, padx=10)
+#     text_block.insert(END, "The average stock for the requested days is: " + str(output_average_requested_stock))
+#     open_old_stock_button = Button(master=top, text='Get average stock')
+#     open_old_stock_button.pack(pady=50, padx=10)
 
 
 menu_button.menu.add_command(label='Error Logs', command=open_error_logs)
@@ -481,8 +529,5 @@ menu_button.menu.add_command(label='Restock', command=open_restock)
 menu_button.menu.add_command(label='Current Stock', command=open_stock)
 menu_button.menu.add_command(label='Average Stock', command=average_stock)
 
-
-
-menu_button.pack()
 
 main_screen.mainloop()
